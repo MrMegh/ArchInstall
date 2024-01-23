@@ -79,9 +79,6 @@ read -p "Enter any additional packages you want to install (space-separated): " 
 # Store the additional packages for later use
 echo "Additional packages: $additional_packages" > additional_packages.txt
 
-# Prompt user about swap
-read -p "Do you want to include a swap partition? (yes/no, default is yes): " include_swap
-
 # List available disks and their sizes
 echo "Available disks:"
 lsblk -d -o NAME,SIZE -n
@@ -111,13 +108,4 @@ mkfs.btrfs "/dev/${install_disk}1"
 # Mount the Btrfs partition
 mount "/dev/${install_disk}1" /mnt
 
-# If the user chose to include swap, create a swapfile
-if [ "$include_swap" == "yes" ]; then
-    echo "Creating swapfile..."
-    dd if=/dev/zero of=/mnt/swapfile bs=1M count=2048 status=progress
-    chmod 600 /mnt/swapfile
-    mkswap /mnt/swapfile
-    swapon /mnt/swapfile
-fi
-
-echo "Wi-Fi configuration, desktop environment choice, password setup, additional packages selection, disk formatting, and swap setup completed. Continue with the Arch Linux installation."
+echo "Wi-Fi configuration, desktop environment choice, password setup, additional packages selection, and disk formatting completed. Continue with the Arch Linux installation."
