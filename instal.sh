@@ -73,13 +73,6 @@ fi
 # Store the root password for later use
 echo "Root password: $root_password" > root_password.txt
 
-# Prompt user for time zone
-timedatectl list-timezones
-read -p "Enter your desired time zone: " time_zone
-
-# Store the selected time zone for later use
-echo "Time zone: $time_zone" > time_zone.txt
-
 # Prompt user for additional packages
 read -p "Enter any additional packages you want to install (space-separated): " additional_packages
 
@@ -127,4 +120,4 @@ if [ "$include_swap" == "yes" ]; then
     swapon /mnt/swapfile
 fi
 
-echo "Wi-Fi configuration, desktop environment choice, password setup, time zone selection, additional packages selection, disk formatting, and swap setup completed. Continue with the Arch Linux installation."
+echo "Wi-Fi configuration, desktop environment choice, password setup, additional packages selection, disk formatting, and swap setup completed. Continue with the Arch Linux installation."
