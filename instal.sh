@@ -12,13 +12,6 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Check if a network interface is already connected
-connected_interface=$(ip link | grep "state UP" | awk -F: '{print $2}' | tr -d ' ')
-if [ -n "$connected_interface" ]; then
-    echo "Already connected via $connected_interface."
-    exit 0
-fi
-
 # Get a list of available Wi-Fi devices
 wifi_devices=$(iwctl device list | grep "Device" | awk '{print $2}')
 
@@ -133,7 +126,5 @@ if [ "$include_swap" == "yes" ]; then
     mkswap /mnt/swapfile
     swapon /mnt/swapfile
 fi
-
-# Continue with the Arch Linux installation process...
 
 echo "Wi-Fi configuration, desktop environment choice, password setup, time zone selection, additional packages selection, disk formatting, and swap setup completed. Continue with the Arch Linux installation."
